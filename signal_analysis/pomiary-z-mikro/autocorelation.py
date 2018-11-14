@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import mpld3
 
 corelation_list = []
 
@@ -27,6 +28,13 @@ for file in file_list:
             else:
                 break
     result = autocorr(x_1, x_2)
+    ran = [i*dt for i in range(-len(x_1) + 1, len(x_1))]
+    plt.plot(ran, result)
+    plt.xlabel('time [s]')
+    plt.savefig('{}.png'.format(file))
+    plt.xlim(-0.006, 0)
+    plt.savefig('{}_2.png'.format(file))
+    plt.clf()
     np_result = np.array(result)
     trenslation = np.argmax(np_result)
     trenslation -= (len(np_result) / 2)
